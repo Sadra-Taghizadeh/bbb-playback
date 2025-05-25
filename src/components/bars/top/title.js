@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   defineMessages,
@@ -30,31 +30,37 @@ const Title = ({ openAbout }) => {
   const intl = useIntl();
   const start = <FormattedDate value={new Date(storage.metadata.start)} />;
 
+  // Update document title when component mounts or metadata changes
+  useEffect(() => {
+    if (storage.metadata.name) {
+      document.title = storage.metadata.name;
+    }
+  }, [storage.metadata.name]);
+
   const interactive = layout.control && config.about;
   if (!interactive) {
-
     return (
-      <span className="title">
+        <span className="title">
         {storage.metadata.name}
-        {date.enabled ? (
-          <> - {start}</>
-        ) : null}
+          {date.enabled ? (
+              <> - {start}</>
+          ) : null}
       </span>
     );
   }
 
   return (
-    <span
-      aria={intl.formatMessage(intlMessages.about)}
-      className={cx('title', { interactive })}
-      onClick={openAbout}
-      onKeyPress={event => handleOnEnterPress(event, openAbout)}
-      tabIndex="0"
-    >
+      <span
+          aria={intl.formatMessage(intlMessages.about)}
+          className={cx('title', { interactive })}
+          onClick={openAbout}
+          onKeyPress={event => handleOnEnterPress(event, openAbout)}
+          tabIndex="0"
+      >
       {storage.metadata.name}
-      {date.enabled ? (
-        <> - {start}</>
-      ) : null}
+        {date.enabled ? (
+            <> - {start}</>
+        ) : null}
     </span>
   );
 };
