@@ -13,7 +13,7 @@ const setDirection = (language) => {
   if (RTL_LOCALES.includes(language)) {
     document.body.parentNode.setAttribute('dir', 'rtl');
   } else {
-    document.body.parentNode.setAttribute('dir', 'ltr');
+    document.body.parentNode.setAttribute('dir', 'rtl');
   }
 };
 

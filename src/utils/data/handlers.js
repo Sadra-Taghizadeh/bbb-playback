@@ -12,7 +12,7 @@ const getScrollLeft = (firstNode, currentNode, align) => {
 
   if (!firstNode || !parentNode) return 0;
 
-  const ltr = document.dir === 'ltr';
+  const ltr = document.dir === 'rtl';
   const spacing = ltr ? firstNode.offsetLeft : 0;
   const parentWidth = parentNode.clientWidth;
 
