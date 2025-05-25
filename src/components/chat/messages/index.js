@@ -11,92 +11,111 @@ import './index.scss';
 const propTypes = {
   currentIndex: PropTypes.number,
   setRef: PropTypes.func,
+  scrollTo: PropTypes.func,
 };
 
 const defaultProps = {
   currentIndex: 0,
   setRef: () => {},
+  scrollTo: () => {},
 };
 
 const Messages = ({
-  currentIndex,
-  scrollTo,
-  setRef,
-}) => {
-
+                    currentIndex,
+                    scrollTo,
+                    setRef,
+                  }) => {
   return (
-    <div className="list">
-      <div className="message-wrapper">
-        {storage.messages.map((item, index) => {
-          const active = index <= currentIndex;
-          const { timestamp } = item;
-          const type = getMessageType(item);
-          switch (type) {
-            case ID.USERS:
+      <div className="list" style={{ fontFamily: 'Vazir, sans-serif' }}>
+        <div className="message-wrapper">
+          {storage.messages.map((item, index) => {
+            const active = index <= currentIndex;
+            const { timestamp } = item;
+            const type = getMessageType(item);
 
-              const indexOfMessageToBeReplied = (item.replyToMessageId) 
-                ? storage.messages.findIndex((message) => message.id === item.replyToMessageId) : -1;
-              const messageToBeReplied = (indexOfMessageToBeReplied !== -1) 
-                ? storage.messages[indexOfMessageToBeReplied]
-                : null;
-              return (
-                <span
-                  key={item.id}
-                  id={item.id}
-                  className='user-message-wrapper'
-                  ref={node => setRef(node, index)}>
-                  <UserMessage
-                    edited={!!item.lastEditedTimestamp}
-                    reactions={item.reactions}
-                    active={active}
-                    emphasized={item.emphasized}
-                    hyperlink={item.hyperlink}
-                    initials={item.initials}
-                    moderator={item.moderator}
-                    name={item.name}
-                    messageToBeReplied={messageToBeReplied}
-                    scrollTo={scrollTo}
-                    text={item.message}
-                    timestamp={timestamp}
-                  />
-                </span>
-              );
-            case ID.POLLS:
+            const messageClasses = [
+              type === ID.USERS ? 'user-message-wrapper' : '',
+              index === currentIndex ? 'highlight' : '',
+              !active ? 'inactive' : '',
+            ].filter(Boolean).join(' ');
 
-              return (
-                <span ref={node => setRef(node, index)}>
-                  <PollMessage
-                    active={active}
-                    answers={item.answers}
-                    question={item.question}
-                    responders={item.responders}
-                    timestamp={timestamp}
-                    type={item.type}
-                  />
-                </span>
-              );
-            case ID.VIDEOS:
+            switch (type) {
+              case ID.USERS:
+                const indexOfMessageToBeReplied = item.replyToMessageId
+                    ? storage.messages.findIndex((message) => message.id === item.replyToMessageId)
+                    : -1;
+                const messageToBeReplied = indexOfMessageToBeReplied !== -1
+                    ? storage.messages[indexOfMessageToBeReplied]
+                    : null;
 
-              return (
-                <span ref={node => setRef(node, index)}>
-                  <VideoMessage
-                    active={active}
-                    url={item.url}
-                    timestamp={timestamp}
-                    type={item.type}
-                  />
-                </span>
-              );
-            default:
-              return <span ref={node => setRef(node, index)} />;
-          }
-        })}
+                return (
+                    <div
+                        key={item.id}
+                        id={item.id}
+                        className={messageClasses}
+                        ref={node => setRef(node, index)}
+                    >
+                      <UserMessage
+                          edited={!!item.lastEditedTimestamp}
+                          reactions={item.reactions}
+                          active={active}
+                          emphasized={item.emphasized}
+                          hyperlink={item.hyperlink}
+                          initials={item.initials}
+                          moderator={item.moderator}
+                          name={item.name}
+                          messageToBeReplied={messageToBeReplied}
+                          scrollTo={scrollTo}
+                          text={item.message}
+                          timestamp={timestamp}
+                      />
+                    </div>
+                );
+
+              case ID.POLLS:
+                return (
+                    <div
+                        key={item.id}
+                        className={`poll-message-wrapper ${!active ? 'inactive' : ''}`}
+                        ref={node => setRef(node, index)}
+                    >
+                      <PollMessage
+                          active={active}
+                          answers={item.answers}
+                          question={item.question}
+                          responders={item.responders}
+                          timestamp={timestamp}
+                          type={item.type}
+                      />
+                    </div>
+                );
+
+              case ID.VIDEOS:
+                return (
+                    <div
+                        key={item.id}
+                        className={`video-message-wrapper ${!active ? 'inactive' : ''}`}
+                        ref={node => setRef(node, index)}
+                    >
+                      <VideoMessage
+                          active={active}
+                          url={item.url}
+                          timestamp={timestamp}
+                          type={item.type}
+                      />
+                    </div>
+                );
+
+              default:
+                return <div key={item.id} ref={node => setRef(node, index)} />;
+            }
+          })}
+        </div>
       </div>
-    </div>
   );
 };
 
 Messages.propTypes = propTypes;
 Messages.defaultProps = defaultProps;
 
-export default Messages;
+export default React.memo(Messages);

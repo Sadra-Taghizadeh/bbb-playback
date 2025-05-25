@@ -1,8 +1,15 @@
+@font-face {
+  font-family: 'Vazir';
+  src: url('./assets/fonts/Vazir.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-semi-bold: 600;
   --font-weight-bold: 700;
 
-  --font-family: Verdana, Arial, Helvetica, sans-serif;
+  --font-family: 'Vazir', Verdana, Arial, Helvetica, sans-serif;
 }

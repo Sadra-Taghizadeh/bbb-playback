@@ -1,13 +1,28 @@
 @import 'src/styles/sizes';
+@import 'src/styles/colors';
+
+:root {
+  --chat-background: var(--white);
+  --chat-border-color: var(--purple-lightest);
+  --chat-scrollbar-thumb: var(--purple-light);
+  --chat-scrollbar-track: var(--purple-extra-light);
+}
 
 .chat-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
+  background-color: var(--chat-background);
+  border-radius: $border-radius;
+  border: 1px solid var(--chat-border-color);
+  font-family: 'Vazir', sans-serif;
+  direction: rtl;
+  box-shadow: 0 2px 10px rgba(133, 92, 255, 0.1);
+  overflow: hidden;
 
   .list {
-    font-size: small;
+    font-size: 0.9rem;
     height: 100%;
     position: relative;
     width: 100%;
@@ -21,9 +36,44 @@
   flex-direction: column;
   overflow-x: hidden;
   overflow-y: auto;
-  padding: $padding 0 0 0;
+  padding: $padding;
   position: absolute;
   scroll-behavior: smooth;
   top: 0;
   width: 100%;
+  gap: $margin-small;
+
+  /* سبک‌دهی اسکرول بار */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--chat-scrollbar-track);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--chat-scrollbar-thumb);
+    border-radius: 4px;
+    border: 2px solid var(--chat-scrollbar-track);
+
+    &:hover {
+      background-color: var(--purple);
+    }
+  }
+}
+
+/* استایل برای حالت تعامل */
+.chat-interaction {
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 15px rgba(133, 92, 255, 0.2);
+  }
+
+  &:focus {
+    outline: 2px solid var(--purple-light);
+    outline-offset: 2px;
+  }
 }

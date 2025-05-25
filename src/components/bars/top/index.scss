@@ -1,9 +1,11 @@
 @import 'src/styles/sizes';
 
 :root {
-  --top-bar-active-background-color: var(--primary-highlight-color);
-  --top-bar-background-color: var(--primary-background-color);
-  --top-bar-color: var(--primary-content-color);
+  --top-bar-active-background-color: var(--purple-light);
+  --top-bar-background-color: var(--purple-extra-light);
+  --top-bar-color: var(--gray-darker);
+  --top-bar-border-radius: #{$border-radius};
+  --top-bar-box-shadow: 0 2px 10px rgba(133, 92, 255, 0.1);
 }
 
 .top-bar {
@@ -14,6 +16,12 @@
   grid-area: top-bar;
   overflow: hidden;
   padding: 0 $padding-small;
+  font-family: var(--font-family);
+  border-radius: var(--top-bar-border-radius);
+  box-shadow: var(--top-bar-box-shadow);
+  margin: $margin-small;
+  height: calc(#{$top-bar-height} - #{$margin-small} * 2);
+  transition: all 0.3s ease;
 
   .left,
   .center,
@@ -28,10 +36,7 @@
   .right {
     display: flex;
     width: 50%;
-  }
-
-  .left {
-    justify-content: flex-start;
+    gap: $margin-small;
   }
 
   .center {
@@ -40,24 +45,29 @@
     width: 100%;
   }
 
-  .right {
-    justify-content: flex-end;
-  }
-
   .title {
     overflow: hidden;
     padding: $padding-small;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-weight: var(--font-weight-semi-bold);
+    font-size: 1.1rem;
   }
 
   .interactive {
     cursor: pointer;
     outline: none;
+    border-radius: $border-radius;
+    transition: all 0.2s ease;
 
     &:focus,
     &:hover {
       background-color: var(--top-bar-active-background-color);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
     }
   }
 }

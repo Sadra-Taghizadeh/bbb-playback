@@ -2,8 +2,15 @@
 
 :root {
   --gray-light-color: var(--gray-light);
-  --gray-lightest-color: var(--gray-lightest);
-  --highlight-color: var(--blue);
+  --gray-lightest-color: var(--purple-extra-light); // تغییر به رنگ بنفش
+  --highlight-color: var(--purple); // تغییر به رنگ بنفش اصلی
+  --message-background: var(--white);
+  --message-border-color: var(--purple-lightest);
+  --message-text-color: var(--gray-dark);
+  --message-name-color: var(--purple-dark);
+  --message-time-color: var(--gray);
+  --message-edited-color: var(--gray-light);
+  --message-hover-color: var(--purple-extra-light);
 }
 
 .reply-tag {
@@ -12,80 +19,75 @@
   width: 90%;
   padding: $padding-small;
   margin-bottom: $margin-extra-small;
-  border-radius: .35rem;
+  border-radius: $border-radius;
   align-items: center;
-  line-height: 1;
+  line-height: 1.4;
+  font-family: 'Vazir', sans-serif;
+  border-right: 3px solid var(--purple-light);
+  direction: rtl;
 }
 
 .user-message-wrapper {
-  transition: background-color .5s ease;
+  transition: all 0.3s ease;
+  margin-bottom: $margin-small;
+  border-radius: $border-radius;
+  background-color: var(--message-background);
+  border: 1px solid var(--message-border-color);
+  padding: $padding-small;
+
+  &:hover {
+    background-color: var(--message-hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(133, 92, 255, 0.1);
+  }
 }
 
 .highlight {
   background-color: var(--highlight-color);
+  color: white;
+
+  .name, .time, .edited-tag {
+    color: white !important;
+  }
 }
 
 .message {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-
   width: 100%;
-
-  [dir="ltr"] & {
-    padding: 0 0 $padding $padding;
-  }
-
-  [dir="rtl"] & {
-    padding: 0 $padding $padding 0;
-  }
+  font-family: 'Vazir', sans-serif;
+  direction: rtl;
 
   .main-content-wrapper {
     display: flex;
+    align-items: flex-start;
   }
 
   .data {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    width:100%;
-
-    [dir="ltr"] & {
-      margin: 0 0 0 $margin;
-    }
-
-    [dir="rtl"] & {
-      margin: 0 $margin 0 0;
-    }
+    width: 100%;
+    margin-right: $margin;
   }
 
   .info {
     box-sizing: border-box;
     display: flex;
     width: 100%;
-    margin: 0 0 $margin-extra-small 0;
-
-    [dir="ltr"] & {
-      padding: 0 $padding-extra-small 0 0;
-    }
-
-    [dir="rtl"] & {
-      padding: 0 0 0 $padding-extra-small;
-    }
+    margin-bottom: $margin-extra-small;
+    align-items: center;
   }
 
   .edited-tag {
-    color: var(--gray-light-color);
+    color: var(--message-edited-color);
     font-style: italic;
-    font-size: 75%;
+    font-size: 0.75rem;
     display: flex;
     align-items: center;
-    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     line-height: 1;
-  }
-  
-  .edited-label {
-    margin-left: 0.25rem;
   }
 
   .name {
@@ -93,21 +95,15 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: var(--message-name-color);
+    font-size: 0.95rem;
   }
 
   .time {
-    align-items: center;
     display: flex;
-    font-size: x-small;
-    opacity: .75;
-
-    [dir="ltr"] & {
-      margin: 0 0 0 $margin;
-    }
-
-    [dir="rtl"] & {
-      margin: 0 $margin 0 0;
-    }
+    font-size: 0.75rem;
+    color: var(--message-time-color);
+    margin-right: $margin;
   }
 
   .text {
@@ -115,68 +111,78 @@
     overflow-wrap: break-word;
     width: 100%;
     white-space: pre-wrap;
-
-    [dir="ltr"] & {
-      padding: 0 $padding-extra-small 0 0;
-    }
-
-    [dir="rtl"] & {
-      padding: 0 0 0 $padding-extra-small;
-    }
+    line-height: 1.5;
+    color: var(--message-text-color);
+    font-size: 0.9rem;
+    padding-right: $padding-extra-small;
   }
 
   .interactive {
     display: flex;
     height: max-content;
     outline: none;
+    transition: all 0.2s ease;
 
     .avatar {
       cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--purple-lightest);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--purple-dark);
+      font-weight: var(--font-weight-bold);
     }
 
-    &:focus,
     &:hover {
-      box-shadow: 0 0 0 $margin-extra-small var(--gray-light-color);
+      transform: scale(1.05);
     }
-  }
-
-  .circle {
-    border-radius: 50%;
-  }
-
-  .inactive {
-    opacity: .5;
   }
 
   .emphasized {
-    font-weight: var(--font-weight-semi-bold);
+    font-weight: var(--font-weight-bold);
+    color: var(--purple-darkest);
   }
 }
 
 .poll-wrapper {
-  background-color: var(--poll-wrapper-background-color);
-  border: $border-width-extra-small solid var(--poll-wrapper-color);
-  padding: $padding-small $padding-small 0 $padding-small;
+  background-color: var(--purple-extra-light);
+  border: 1px solid var(--purple-lightest);
+  border-radius: $border-radius;
+  padding: $padding-small;
+  margin-bottom: $margin-small;
+  direction: rtl;
 
-  [dir="ltr"] & {
-    margin: 0 $margin 0 0;
+  .poll-question {
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--purple-dark);
+    margin-bottom: $margin-small;
   }
 
-  [dir="rtl"] & {
-    margin: 0 0 0 $margin;
-  }
-
-  .poll-options,
-  .poll-question,
-  .poll-result {
-    padding-bottom: $padding-small;
+  .poll-options {
+    margin-bottom: $margin-small;
   }
 
   .poll-bar {
-    color: var(--poll-bar-color);
+    height: 8px;
+    background-color: var(--purple-lightest);
+    border-radius: $border-radius;
+    overflow: hidden;
+    margin-top: $margin-extra-small;
+
+    .poll-progress {
+      height: 100%;
+      background-color: var(--purple);
+      border-radius: $border-radius;
+    }
   }
 
   .poll-label {
-    font-weight: var(--font-weight-semi-bold);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $margin-extra-small;
+    font-size: 0.85rem;
   }
 }

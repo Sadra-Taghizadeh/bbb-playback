@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   defineMessages,
   useIntl,
@@ -27,6 +27,7 @@ const Chat = () => {
   const interaction = useRef(false);
   const firstNode = useRef();
   const currentNode = useRef();
+  const [isHovered, setIsHovered] = useState(false);
 
   const setRef = (node, index) => {
     if (index === 0) {
@@ -40,7 +41,8 @@ const Chat = () => {
 
   const scrollTo = (element) => {
     handleAutoScroll(firstNode.current, element, POSITIONS.TOP, config.align);
-  }
+  };
+
   useEffect(() => {
     if (!interaction.current) {
       if (config.scroll) {
@@ -50,21 +52,27 @@ const Chat = () => {
   });
 
   return (
-    <div
-      aria-label={intl.formatMessage(intlMessages.aria)}
-      aria-live="polite"
-      className="chat-wrapper"
-      id={ID.CHAT}
-      onMouseEnter={() => interaction.current = true}
-      onMouseLeave={() => interaction.current = false}
-      tabIndex="0"
-    >
-      <Messages
-        currentIndex={currentIndex}
-        scrollTo={scrollTo}
-        setRef={(node, index) => setRef(node, index)}
-      />
-    </div>
+      <div
+          aria-label={intl.formatMessage(intlMessages.aria)}
+          aria-live="polite"
+          className={`chat-wrapper ${isHovered ? 'chat-interaction' : ''}`}
+          id={ID.CHAT}
+          onMouseEnter={() => {
+            interaction.current = true;
+            setIsHovered(true);
+          }}
+          onMouseLeave={() => {
+            interaction.current = false;
+            setIsHovered(false);
+          }}
+          tabIndex="0"
+      >
+        <Messages
+            currentIndex={currentIndex}
+            scrollTo={scrollTo}
+            setRef={(node, index) => setRef(node, index)}
+        />
+      </div>
   );
 };
 

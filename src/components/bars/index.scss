@@ -1,8 +1,71 @@
+@import 'src/styles/sizes';
+
 :root {
-  --bottom-bar-background-color: var(--primary-background-color);
+  --bottom-bar-background-color: var(--purple-extra-light);
+  --bottom-bar-border-color: var(--purple-lightest);
+  --bottom-bar-text-color: var(--gray-darker);
+  --bottom-bar-icon-size: 1.5rem;
+  --bottom-bar-height: #{$bottom-bar-height};
+  --bottom-bar-padding: #{$padding-small};
 }
 
 .bottom-bar {
   background-color: var(--bottom-bar-background-color);
   grid-area: bottom-bar;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--bottom-bar-padding);
+  height: var(--bottom-bar-height);
+  border-top: 1px solid var(--bottom-bar-border-color);
+  font-family: 'Vazir', sans-serif;
+  direction: rtl; /* برای پشتیبانی از راست به چپ */
+
+  .control-group {
+    display: flex;
+    align-items: center;
+    gap: $margin;
+
+    .control-button {
+      background: none;
+      border: none;
+      color: var(--bottom-bar-text-color);
+      cursor: pointer;
+      padding: $padding-extra-small;
+      border-radius: $border-radius;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: var(--purple-lightest);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      .icon {
+        font-size: var(--bottom-bar-icon-size);
+      }
+
+      .label {
+        font-size: 0.8rem;
+        margin-right: $margin-extra-small;
+        font-weight: var(--font-weight-regular);
+      }
+    }
+
+    .primary-button {
+      background-color: var(--purple);
+      color: white;
+      padding: $padding-extra-small $padding-small;
+
+      &:hover {
+        background-color: var(--purple-dark);
+      }
+    }
+  }
 }
