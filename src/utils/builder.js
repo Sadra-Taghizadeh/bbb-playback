@@ -125,6 +125,7 @@ const buildMetadata = result => {
     const name = meta.meetingName ? meta.meetingName : recording.meeting._name;
     const participants = parseInt(recording.participants, 10);
     const start = parseInt(recording.start_time, 10);
+    const coursenumber = meta.coursenumber ? parseInt(meta.coursenumber, 10) : null;
 
     data = {
       end,
@@ -132,6 +133,7 @@ const buildMetadata = result => {
       name,
       participants,
       start,
+      coursenumber,
     };
   }
 
