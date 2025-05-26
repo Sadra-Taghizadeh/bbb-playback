@@ -42,7 +42,7 @@ const Title = ({ openAbout }) => {
         <span className="title">
         {storage.metadata.name}
           {courseNumber ? (
-              <> - Course {courseNumber}</>
+              <>{courseNumber}</>
           ) : null}
       </span>
     );
