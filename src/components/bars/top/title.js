@@ -7,6 +7,7 @@ import {
 import cx from 'classnames';
 import {
   controls as config,
+  date,
 } from 'config';
 import { handleOnEnterPress } from 'utils/data/handlers';
 import storage from 'utils/data/storage';
@@ -41,7 +42,7 @@ const Title = ({ openAbout }) => {
         <span className="title">
         {storage.metadata.name}
           {courseNumber ? (
-              <>{courseNumber}</>
+              <>  {courseNumber}</>
           ) : null}
       </span>
     );
@@ -57,7 +58,7 @@ const Title = ({ openAbout }) => {
       >
       {storage.metadata.name}
         {courseNumber ? (
-            <> - Course {courseNumber}</>
+            <>  {courseNumber}</>
         ) : null}
     </span>
   );
