@@ -7,7 +7,6 @@ import {
 import cx from 'classnames';
 import {
   controls as config,
-  date,
 } from 'config';
 import { handleOnEnterPress } from 'utils/data/handlers';
 import storage from 'utils/data/storage';
