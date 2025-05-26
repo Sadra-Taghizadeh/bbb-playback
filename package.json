@@ -1,7 +1,7 @@
 {
   "name": "bbb-playback",
   "version": "5.3.1",
-  "homepage": "/playback/presentation/2.3",
+  "homepage": "/playback/presentation/2.4",
   "dependencies": {
     "@bigbluebutton/tldraw": "^2.0.0-alpha.25",
     "bowser": "^2.11.0",
@@ -9,6 +9,7 @@
     "darkreader": "^4.9.46",
     "linkify-react": "^3.0.4",
     "linkifyjs": "^3.0.5",
+    "moment-jalaali": "^0.10.4",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

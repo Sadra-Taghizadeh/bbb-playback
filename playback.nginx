@@ -1,4 +1,4 @@
-location /playback/presentation/2.3 {
+location /playback/presentation/2.4 {
   root /var/bigbluebutton;
-  try_files $uri /playback/presentation/2.3/index.html;
+  try_files $uri /playback/presentation/2.4/index.html;
 }
